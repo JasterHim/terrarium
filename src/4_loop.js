@@ -15,13 +15,23 @@ const map = [
     '#', '*', '', '', '', '', '', '', '', '', '', '*', '*', '*', '#',
     '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#', '#',
 ];
-const start = () => {
-    const terra = new Terra(15, 400);
-    
+const init = () => {
+    const configuration = {
+        size: 15,
+        background: "sand",
+        debug: true, 
+    };
+    const terra = new Terra(configuration);
+    const controls = new Controls(terra);
+
     terra.load(map);
-    terra.start();
+    
+
+    document.body.appendChild(controls.render());
+
+    terra.draw();
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    start();
+    init();
 });

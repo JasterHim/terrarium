@@ -27,13 +27,29 @@ class Texture {
         Texture.height = height;
     }
 
-    render () {
+    static background(texture) {
+       
+        Texture._background = [FOLDER, textures[texture]].join('/');
+    }
+    static debug(debug = false) {
+       
+        Texture._debug = debug;
+    }
+    render (stats) {
         const div = document.createElement('div');
 
+        div.innerText = stats || '';
+        if (Texture._debug) {
+            div.style.fontSize = Math.floor(Texture.height / 2) + 'px';
+        }
+
+       
         div.style.width = Texture.width + 'px';
         div.style.height = Texture.height + 'px';
+        div.style.lineHeight = (Texture.height + 2) + 'px';
         div.style.display = 'inline-block';
-        div.style.background = 'url(' + this.path + ')';
+
+        div.style.background = `url(${this.path}), url(${Texture._background})`;
         div.style.backgroundSize = '100%';
 
         return div;
